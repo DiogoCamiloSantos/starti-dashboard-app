@@ -1,0 +1,42 @@
+<div class="table-header">
+    <div class="filter">
+        <mat-form-field class="medium" appearance="fill">
+            <input matInput type="text" placeholder="Pesquisar por usuário">
+        </mat-form-field>
+        <button mat-flat-button>Filtrar</button>
+    </div>
+    <div class="paginator">
+        <button>{{"\<"}}</button>
+        <button class="page">1</button>
+        <button class="page">2</button>
+        <button class="page">3</button>
+        <button class="page">4</button>
+        <button class="page">5</button>
+        <button>{{">"}}</button>
+    </div>
+</div>
+<table [cellSpacing]="0" [cellPadding]="10">
+    <thead>
+        <th>Usuário</th>
+        <th>Título</th>
+        <th>Total</th>
+        <th>Valor</th>
+        <th>Pago</th>
+        <th></th>
+    </thead>
+    <tbody>
+        @for (payment of payments$ | async; track payment) {
+          <tr>
+              <td>{{payment.getName()}}<span>{{payment.getUsername()}}</span></td>
+              <td>{{payment.getTitle()}}</td>
+              <td>{{payment.getDate()}}<span>10:00 AM</span></td>
+              <td>{{payment.getValue()}}</td>
+              <td><input type="checkbox" [checked]="payment.getIsPayed()"/></td>
+              <td>
+                  <a><div class="edit"></div></a>
+                  <a><div class="remove"></div></a>
+              </td>
+          </tr>
+        }
+    </tbody>
+</table>

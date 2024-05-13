@@ -1,0 +1,40 @@
+@import '../../../ui/styles/variables';
+
+    :host {
+    display: flex;
+    background-color: $darkBlue;
+    width: 100%;
+    height: 70px;
+}
+
+nav {
+    width: -webkit-fill-available;
+}
+
+.blue-logo {
+    height: 25px;
+    background-repeat: no-repeat;
+    background-image: url('/assets/images/payfriends-blue-logo.png');
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: -webkit-fill-available;
+
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 20px;
+        cursor: pointer;
+
+        .profile {
+            height: 36px;
+            border-radius: 25px;
+            width: 36px;
+            background-image: url('/assets/images/user-profile.svg');
+        }
+    }
+}

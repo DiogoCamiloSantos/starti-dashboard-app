@@ -1,0 +1,146 @@
+@import '../../../ui/styles/_variables.scss';
+@import '../../../ui/styles/icons.scss';
+
+:host {
+    width: 100%;
+    display: inline-grid;
+    background-color: white;
+    margin: 15px 0;
+    border-radius: 10px;
+}
+
+.table-header {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .filter {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        ::ng-deep {
+            &.medium {
+                .mat-form-field-wrapper {
+                    padding-bottom: 0;
+
+                    .mat-form-field-flex {
+                        height: 36px;
+                        width: 245px;
+                        padding: 0;
+                        background-color: transparent;
+
+                        .mat-form-field-infix {
+                            border-top-width: 0px;
+                            padding: 0;
+
+                            input {
+                                width: 90%;
+                                padding: 10px 7px 0px 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        button {
+            background-color: $blueHover;
+        }
+    }
+
+    .paginator {
+        display: flex;
+        align-items: center;
+
+        button {
+            background-color: transparent;
+            user-select: none;
+            border: none;
+            height: 26px;
+            width: 26px;
+            border-radius: 5px;
+            padding-bottom: 0;
+
+            &:hover {
+                background-color: $blueHover;
+            }
+
+            &.page {
+                &:focus {
+                    background-color: $blue;
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+table {
+    border-collapse: collapse;
+
+    thead {
+        text-align: left;
+
+        th {
+            border-bottom: 2px solid $blueHover;
+        }
+    }
+
+    tr {
+        height: 80px;
+
+        &:nth-child(even) {
+            background-color: $lightBlue;
+        }
+    }
+
+    td {
+        &.large {
+            width: 30%;
+        }
+
+        &.right {
+            text-align: right;
+        }
+
+        span {
+            display: block;
+            padding-bottom: 15px;
+            color: $defaultGrey
+        }
+
+        &:has(a) {
+            display: flex;
+            justify-content: end;
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+            padding-right: 20px;
+        }
+
+        a {
+            padding: 20px 0;
+
+            div {
+                &:focus {
+                    background-color: $blue;
+                }
+            }
+
+            .edit {
+                background-image: $edit;
+                height: 20px;
+                width: 20px;
+            }
+
+            .remove {
+                background-image: $remove;
+                background-repeat: round;
+                height: 20px;
+                width: 20px;
+            }
+        }
+    }
+}
