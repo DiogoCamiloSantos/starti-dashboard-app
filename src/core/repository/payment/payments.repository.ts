@@ -3,6 +3,7 @@ import { Observable, delay, of } from "rxjs";
 import { Payment } from "src/core/domain/payment/payment";
 import { RemoteGatewayFactory } from "../../gateway/remote-gateway-factory";
 import { PaymentParser } from "../../parser/payment/payment.parser";
+import TableData, { TableCell } from "src/ui/components/table/models/table-data.interface";
 
 @Injectable({providedIn: `root`})
 export class PaymentRepository {
@@ -27,7 +28,16 @@ export class PaymentRepository {
       const data = this.paymentParser.parseList(response);
 
       return of(payments).pipe(delay(2000));
-  }
+    }
+
+    getTableData(): Observable<TableData<Payment>> {
+      const request = this.remoteGatewayFactory.createDefaultRemoteGateway();
+      const response = payments;
+
+      const data = this.paymentParser.parseListAsTable(response);
+
+      return of(data).pipe(delay(2000));
+    }
 }
 
 const payments = [

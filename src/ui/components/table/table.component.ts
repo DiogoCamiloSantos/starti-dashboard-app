@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { BehaviorSubject } from 'rxjs';
-import { Payment } from 'src/core/domain/payment/payment';
+import { Observable, of } from 'rxjs';
 import { RepositoryModule } from 'src/core/repository/repository.module';
-import { PaymentService } from 'src/core/service/payments/payments.service';
 import { ServiceModule } from 'src/core/service/service.module';
+import TableData from './models/table-data.interface';
 
 @Component({
   standalone: true,
@@ -23,25 +22,20 @@ import { ServiceModule } from 'src/core/service/service.module';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent implements OnInit, OnDestroy, OnChanges {
 
-  protected paymentsSubject = new BehaviorSubject<Payment[]>([]);
-  protected payments$ = this.paymentsSubject.asObservable();
-
-  private paymentService = inject(PaymentService);
-
-  loadPayments() {
-    this.paymentService.getAll().subscribe(
-      payments =>
-      this.paymentsSubject.next(payments)
-    );
-  }
+  signalList = input<Observable<any[]> | null>(of([]));
+  signalListTable = input<Observable<TableData<any>> | null>(of({titles: [], values: []}));
 
   ngOnInit(): void {
-    this.loadPayments();
   }
 
   ngOnDestroy(): void {
-    this.paymentsSubject.unsubscribe();
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+
   }
 }

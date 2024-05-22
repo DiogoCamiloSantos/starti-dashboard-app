@@ -21,8 +21,7 @@ export class Payment {
       isPayed?: boolean,
       image?: string
     ) {
-
-      this.id = id || "";
+      this.id = id || uuidv4();
       this.name = name || "";
       this.username = username || "";
       this.title = title || "";
@@ -33,7 +32,7 @@ export class Payment {
     }
 
     public getId(): string {
-        return String(this.id) || uuidv4();
+        return String(this.id);
     }
 
     public setId(id: string): void {

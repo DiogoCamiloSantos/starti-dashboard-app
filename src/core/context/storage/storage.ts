@@ -5,14 +5,15 @@ export abstract class StorageEntry<T> {
         protected key: string,
         protected parser: AbstractParser<T> | any = null,
         private storage: Storage
-    ) { }
+    ) {
+    }
 
     protected parse(entity:  any): T | null {
         return this.parser.parse(entity);
     }
 
     get(): T | null {
-        const entity = this.storage.getItem(this.key);
+        const entity = this.storage?.getItem(this.key);
         if (entity) {
             const entityJson = JSON.parse(entity);
             if (this.parser) {
@@ -22,15 +23,15 @@ export abstract class StorageEntry<T> {
             }
             return entityJson;
         }
-        
+
         return null;
     }
 
     set(item: T) {
-        this.storage.setItem(this.key, JSON.stringify(item));
+        this.storage?.setItem(this.key, JSON.stringify(item));
     }
 
     remove() {
-        this.storage.removeItem(this.key);
+        this.storage?.removeItem(this.key);
     }
 }
