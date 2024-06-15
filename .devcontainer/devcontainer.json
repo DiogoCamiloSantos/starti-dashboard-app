@@ -1,0 +1,16 @@
+{
+    "name": "Angular Dev Container",
+    "dockerFile": "./../Dockerfile",
+    "context": "..",
+    "workspaceFolder": "/app",
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/sh"
+    },
+    "extensions": [
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "angular.ng-template"
+    ],
+    "postCreateCommand": "npm install"
+  }
+  
