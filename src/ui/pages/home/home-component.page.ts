@@ -28,7 +28,7 @@ import { PaymentParser } from 'src/core/parser/payment/payment.parser';
 export class HomeComponentPage implements OnChanges {
   loading = false;
   users: User[];
-  title = signal(`Lista de Pagamentos`);
+  title = signal(`Meus Pagamentos`);
 
   protected paymentsSubject = new BehaviorSubject<TableData<Payment>>({titles: [], values: []});
   protected payments$ = this.paymentsSubject.asObservable();

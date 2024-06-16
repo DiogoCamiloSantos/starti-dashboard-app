@@ -11,6 +11,6 @@
       "esbenp.prettier-vscode",
       "angular.ng-template"
     ],
-    "postCreateCommand": "npm install"
+    "postCreateCommand": "npm start"
   }
   
