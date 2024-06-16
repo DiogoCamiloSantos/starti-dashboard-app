@@ -1,7 +1,7 @@
 <div class="table-header">
   <div class="filter">
     <mat-form-field class="medium" appearance="fill">
-      <input matInput type="text" placeholder="Pesquisar por usuário">
+      <input matInput [(ngModel)]="search" (ngModelChange)="changeFilter()" type="text" placeholder="Pesquisar por usuário">
     </mat-form-field>
     <button mat-flat-button>Filtrar</button>
   </div>
@@ -23,7 +23,7 @@
     <th></th>
   </thead>
   <tbody>
-    @for (row of (signalListTable() | async)?.values; track row) {
+    @for (row of signalListValues(); track row) {
       <tr>
         @for (col of row; track col) {
           <td>
