@@ -18,7 +18,7 @@
 <table [cellSpacing]="0" [cellPadding]="10">
   <thead>
     @for (title of (signalListTable() | async)?.titles; track title) {
-    <th>{{title}}</th>
+      <th>{{title}}</th>
     }
     <th></th>
   </thead>
@@ -26,12 +26,12 @@
     @for (row of signalListValues(); track row) {
       <tr>
         @for (col of row; track col) {
-          <td>
-            {{col.value}}
-            @if (col.subtitle; as sub) {
-              <span>{{ sub }}</span>
-            }
-          </td>
+        <td>
+          {{ col.type == 'date' && (col.value.toString() | date) || col.value }}
+          @if (col.subtitle; as sub) {
+            <span>{{ sub }}</span>
+          }
+        </td>
         }
         <td>
           <a>

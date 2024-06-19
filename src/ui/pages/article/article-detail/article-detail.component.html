@@ -1,0 +1,7 @@
+<div class="article-detail" *ngIf="article">
+    <h2>{{ article.title }}</h2>
+    <p>{{ article.content }}</p>
+    <small>Autor: {{ article.author }}</small>
+    <small>Publicado em: {{ article.createdAt | date }}</small>
+  </div>
+  

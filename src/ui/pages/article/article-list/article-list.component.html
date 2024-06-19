@@ -1,0 +1,11 @@
+<div class="article-list">S
+  <h2>Articles</h2>
+  <ul>
+    <li *ngFor="let article of articles">
+      <a [routerLink]="['/article', article.id]">{{ article.title }}</a>
+      <button (click)="editArticle(article.id || '')">Edit</button>
+      <button (click)="deleteArticle(article.id || '')">Delete</button>
+    </li>
+  </ul>
+  <button routerLink="/new-article">New Article</button>
+</div>

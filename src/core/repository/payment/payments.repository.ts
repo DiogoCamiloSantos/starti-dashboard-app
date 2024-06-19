@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Observable, delay, of } from "rxjs";
+import { Observable, delay, map, of } from "rxjs";
 import { Payment } from "src/core/domain/payment/payment";
+import { BackendUrl } from "src/core/gateway/config/url/back-end.url";
+import TableData from "src/ui/components/table/models/table-data.interface";
 import { RemoteGatewayFactory } from "../../gateway/remote-gateway-factory";
 import { PaymentParser } from "../../parser/payment/payment.parser";
-import TableData, { TableCell } from "src/ui/components/table/models/table-data.interface";
 
 @Injectable({providedIn: `root`})
 export class PaymentRepository {
@@ -12,22 +13,24 @@ export class PaymentRepository {
         private paymentParser: PaymentParser
     ) {}
 
-    // async get(): Promise<Payment[]> {
-    //     const request = this.remoteGatewayFactory.createDefaultRemoteGateway();
-    //     const response = payments;
+    get_(): Observable<Payment[]> {
+        const request = this.remoteGatewayFactory.createDefaultRemoteGateway();
+        const response = payments;
 
-    //     const data = this.paymentParser.parseList(response);
+        const data = this.paymentParser.parseList(response);
 
-    //     return data;
-    // }
+        return of(data).pipe(delay(2000));;
+    }
 
     get(): Observable<Payment[]> {
       const request = this.remoteGatewayFactory.createDefaultRemoteGateway();
-      const response = payments;
 
-      const data = this.paymentParser.parseList(response);
-
-      return of(payments).pipe(delay(2000));
+      return request.getObs(new BackendUrl("UserProfile")).pipe(map((response: any) => {
+        const data = this.paymentParser.parseList(response);
+        console.log(data);
+        
+        return data;
+      }), delay(2000));
     }
 
     getTableData(): Observable<TableData<Payment>> {
@@ -35,7 +38,7 @@ export class PaymentRepository {
       const response = payments;
 
       const data = this.paymentParser.parseListAsTable(response);
-
+      
       return of(data).pipe(delay(2000));
     }
 }

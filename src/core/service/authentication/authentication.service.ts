@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { User } from 'src/core/domain/user/user';
@@ -12,7 +12,6 @@ export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
     private appContext: AppContext = inject(AppContext);
-
 
     constructor(
         private http: HttpClient
@@ -26,12 +25,19 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`${environment.backendUrl}/users/authenticate`, { username, password })
+        return this.http.post<any>(`${environment.backendUrl}/api/app/auth/login`, { username, password })
             .pipe(map(user => {
+                console.log(user);
+                
                 this.appContext.setUserCredential(user);
                 this.currentUserSubject.next(user);
                 return user;
-            }));
+            }),
+            catchError((error) => {
+                console.log('error', error);
+                return error
+            })
+       );
     }
 
     logout() {

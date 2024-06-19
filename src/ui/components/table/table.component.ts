@@ -1,13 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, computed, input, signal } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  input,
+  signal,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Observable, map, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RepositoryModule } from 'src/core/repository/repository.module';
 import { ServiceModule } from 'src/core/service/service.module';
 import TableData, { TableCell } from './models/table-data.interface';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
@@ -32,26 +40,26 @@ export class TableComponent implements OnInit, OnDestroy, OnChanges {
   );
 
   ngOnInit(): void {
-    this.signalListTable()?.subscribe((table) => {
-      this.signalListValues.set(table.values);
-    });
+    this.signalListTable()?.subscribe((table) =>
+      this.signalListValues.set(table.values)
+    );
   }
 
   ngOnDestroy(): void {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
 
   changeFilter() {
-    this.signalListTable()?.subscribe((table) => {
+    this.signalListTable()?.subscribe((table) =>
       this.signalListValues.update(() =>
-        table.values.filter((row) => row.some((cell) => {
-          return cell.value.toString().toLowerCase().includes(this.search().toLowerCase());
-        }))
-      );
-    });
+        table.values.filter((row) =>
+          row.some((cell) =>
+            cell.value?.toString()
+              .toLowerCase()
+              .includes(this.search().toLowerCase())
+          )
+        )
+      )
+    );
   }
-
-  
 }

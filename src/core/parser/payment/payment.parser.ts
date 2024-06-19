@@ -8,13 +8,12 @@ export class PaymentParser extends AbstractParser<Payment> {
     parse(payload: any): Payment {
         const payment = new Payment();
 
-        payment.setId(payload.id);
-        payment.setName(payload.name);
-        payment.setUsername(payload.username);
+        payment.setName(`${payload.firstName} ${payload.lastName}`);
+        payment.setUsername(payload.email);
         payment.setTitle(payload.title);
         payment.setValue(payload.value);
-        payment.setDate(payload.date);
-        payment.setImage(payload.image);
+        payment.setDate(payload.updatedAt);
+        // payment.setImage(payload.image);
         payment.setIsPayed(payload.isPayed);
 
         return payment;
@@ -26,9 +25,9 @@ export class PaymentParser extends AbstractParser<Payment> {
       const values = payments.map<TableCell[]>(payment => ([
         { value: payment.getName(), subtitle: payment.getUsername() },
         { value: payment.getTitle() },
-        { value: payment.getDate(), subtitle: '10:00 AM' },
+        { value: payment.getDate(), subtitle: '10:00 AM', type: "date" },
         { value: payment.getValue() },
-        { value: payment.getIsPayed() }
+        { value: payment.getIsPayed() ? "Sim" : "Não" }
       ]));
 
       return {

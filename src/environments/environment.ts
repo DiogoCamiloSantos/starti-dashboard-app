@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  backendUrl: 'http://localhost:3000/',
+  backendUrl: 'http://localhost:5006/api/',
   appName: 'PayFriends'
 };

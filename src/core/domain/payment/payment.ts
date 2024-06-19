@@ -2,7 +2,7 @@ import {v4 as uuidv4} from 'uuid';
 
 export class Payment {
 
-    private id: string;
+    private id?: string;
     private name: string;
     private username: string;
     private title: string;
@@ -21,7 +21,7 @@ export class Payment {
       isPayed?: boolean,
       image?: string
     ) {
-      this.id = id || uuidv4();
+      this.id = id;
       this.name = name || "";
       this.username = username || "";
       this.title = title || "";

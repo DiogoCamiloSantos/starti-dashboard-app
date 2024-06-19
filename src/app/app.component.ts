@@ -1,7 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppContext } from 'src/core/context/app-context';
+import { HeaderComponent } from 'src/ui/components/header/header.component';
+import { SidebarComponent } from 'src/ui/components/sidebar/sidebar.component';
 import { CustomMaterialModule } from 'src/ui/modules/material/material.module';
 
 @Component({
@@ -9,7 +10,9 @@ import { CustomMaterialModule } from 'src/ui/modules/material/material.module';
   standalone: true,
   imports: [
     RouterOutlet,
-    CustomMaterialModule
+    CustomMaterialModule,
+    SidebarComponent,
+    HeaderComponent
   ],
   providers: [
     AppContext

@@ -12,6 +12,7 @@ import { SpacingDirective } from 'src/ui/directives/spacing.directive';
 import { Payment } from './../../../core/domain/payment/payment';
 import TableData from 'src/ui/components/table/models/table-data.interface';
 import { PaymentParser } from 'src/core/parser/payment/payment.parser';
+import { AuthenticationService } from 'src/core/service/authentication/authentication.service';
 
 @Component({
   standalone: true,
@@ -28,13 +29,14 @@ import { PaymentParser } from 'src/core/parser/payment/payment.parser';
 export class HomeComponentPage implements OnChanges {
   loading = false;
   users: User[];
-  title = signal(`Lista de Pagamentos`);
+  title = signal(`Lista de Usuários`);
 
   protected paymentsSubject = new BehaviorSubject<TableData<Payment>>({titles: [], values: []});
   protected payments$ = this.paymentsSubject.asObservable();
 
   private paymentService = inject(PaymentService);
   private paymentParser = inject(PaymentParser);
+  private authenticationService = inject(AuthenticationService);
 
   constructor(private userService: UserService) { }
 
@@ -48,10 +50,10 @@ export class HomeComponentPage implements OnChanges {
 
   ngOnInit() {
     this.loading = true;
-    this.userService.getAll().pipe(first()).subscribe(users => {
-      this.loading = false;
-      this.users = users;
-    });
+    // this.userService.getAll().pipe(first()).subscribe(users => {
+    //   this.loading = false;
+    //   this.users = users;
+    // });
 
     this.paymentService.getAll()
     .pipe(map(payments => this.paymentParser.parseListAsTable(payments)))
@@ -59,6 +61,8 @@ export class HomeComponentPage implements OnChanges {
       payments =>
         this.paymentsSubject.next(payments)
     );
+
+    this.authenticationService
   }
 
 

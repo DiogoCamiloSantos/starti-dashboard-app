@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Url } from "./config/url/url";
+import { catchError, map } from "rxjs";
 
 export class RemoteGateway {
   constructor(private backendUrl: string, private httpClient: HttpClient) {}
@@ -20,7 +21,7 @@ export class RemoteGateway {
 
   postWithFile(url: Url, file: File) {
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append('file', file);
     return new Promise((resolve, reject) => {
       this.httpClient
         .post(url.getUrl(), formData)
@@ -37,7 +38,7 @@ export class RemoteGateway {
   download(url: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpClient
-        .get(this.buildUrl(url), { responseType: "blob" as "json" })
+        .get(this.buildUrl(url), { responseType: 'blob' as 'json' })
         .toPromise()
         .then((r) => {
           resolve(r);
@@ -51,7 +52,7 @@ export class RemoteGateway {
   downloadAsPost(url: string, payload: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpClient
-        .post(this.buildUrl(url), payload, { responseType: "blob" })
+        .post(this.buildUrl(url), payload, { responseType: 'blob' })
         .toPromise()
         .then((r) => {
           resolve(r);
@@ -65,7 +66,7 @@ export class RemoteGateway {
   downloadAsGet(url: Url, headers: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.httpClient
-        .get(url.getUrl(), { headers, responseType: "blob" as "json" })
+        .get(url.getUrl(), { headers, responseType: 'blob' as 'json' })
         .toPromise()
         .then((r) => {
           resolve(r);
@@ -88,6 +89,10 @@ export class RemoteGateway {
           reject(response);
         });
     });
+  }
+
+  getObs(url: Url) {
+    return this.httpClient.get(url.getUrl());
   }
 
   getWithHeaders(url: Url, headers: any): Promise<any> {
@@ -175,7 +180,7 @@ export class RemoteGateway {
   }
 
   private buildUrl(action: string) {
-    if (!!action && action.charAt(0) !== "/") {
+    if (!!action && action.charAt(0) !== '/') {
       action = `/${action}`;
     }
     return `${this.backendUrl}${action}`;
