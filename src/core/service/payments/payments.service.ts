@@ -1,24 +1,25 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject, map } from "rxjs";
+import ITableData from "src/ui/components/table/interfaces/table-data.interface";
+import { UserProfileTableData } from "src/ui/components/table/models/user-profile-table-data.model";
 import { PaymentRepository } from "../../repository/payment/payments.repository";
-import { Payment } from "src/core/domain/payment/payment";
-import { Observable } from "rxjs";
-import TableData, { TableCell } from "src/ui/components/table/models/table-data.interface";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PaymentService {
-  constructor(
-    private paymentRepository: PaymentRepository
-  ) { }
+  constructor(private paymentRepository: PaymentRepository) {}
 
-  parseToTable(payments: Payment[]) {
+  paymentsSubject = new BehaviorSubject<ITableData>({ titles: [], values: [] });
+  payments$ = this.paymentsSubject.asObservable();
 
-  }
-
-  getAll(): Observable<Payment[]> {
+  getAll() {
     try {
-      return this.paymentRepository.get();
+      return this.paymentRepository
+        .get()
+        .pipe(map((payments) => new UserProfileTableData(payments)))
+        .subscribe((payments) => this.paymentsSubject.next(payments));
+        
     } catch (error) {
       console.error(error);
       throw new Error(`Payment service is not available!`);

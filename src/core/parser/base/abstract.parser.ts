@@ -1,9 +1,9 @@
-import TableData, { TableCell } from "src/ui/components/table/models/table-data.interface";
+import ITableData, { ITableCell } from "src/ui/components/table/interfaces/table-data.interface";
 import { IParser } from "./parser.interface";
 
 export abstract class AbstractParser<T> implements IParser<T> {
     abstract parse(payload: Payload, parse?: IParser<T>): T;
-    abstract parseListAsTable(payload: PayloadList): TableData<T>;
+    abstract parseListAsTable(payload: PayloadList): ITableData;
 
     parseList(payload: PayloadList): Array<T> {
         if (!payload || !Array.isArray(payload)) {

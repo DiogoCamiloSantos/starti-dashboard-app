@@ -1,14 +1,47 @@
-import {v4 as uuidv4} from 'uuid';
+import { TableDataColumn } from "src/ui/decorators/table-data/tabledata.decorator";
+
+
 
 export class Payment {
 
-    private id?: string;
+    private id?: string;   
+
+    @TableDataColumn("Usuário", {
+        subtitle: "username"
+    })
     private name: string;
+
+    
+    @TableDataColumn("Criado em", {
+        type: "date"
+    })
+    private createdAt: string;
+    
+
     private username: string;
+
+
     private title: string;
+
+    
+
+
+    @TableDataColumn("Valor", {
+        type: "currency"
+    })
     private value: number;
-    private date: string;
+
+    
+    private updatedAt: string;
+
+ 
+
     private image: string;
+
+
+    @TableDataColumn("Verificado", {
+        type: "text"
+    })
     private isPayed: boolean;
 
     constructor (
@@ -26,7 +59,7 @@ export class Payment {
       this.username = username || "";
       this.title = title || "";
       this.value = value || 0;
-      this.date = date || "";
+      this.createdAt = date || "";
       this.image = image || "";
       this.isPayed = isPayed || false;
     }
@@ -71,12 +104,20 @@ export class Payment {
         this.value = value;
     }
 
-    public getDate(): string {
-        return this.date;
+    public getCreatedAt(): string {
+        return this.createdAt;
     }
 
-    public setDate(date: string): void {
-        this.date = date;
+    public getUpdatedAt(): string {
+        return this.updatedAt;
+    }
+
+    public setCreatedAt(date: string): void {
+        this.createdAt = date;
+    }    
+
+    public setUpdatedAt(date: string): void {
+        this.updatedAt = date;
     }
 
     public getImage(): string {

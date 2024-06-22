@@ -1,21 +1,19 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
-  input,
-  signal,
+  computed,
+  input
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Observable, of } from 'rxjs';
 import { RepositoryModule } from 'src/core/repository/repository.module';
 import { ServiceModule } from 'src/core/service/service.module';
-import TableData, { TableCell } from './models/table-data.interface';
+import { debouncedSignal } from 'src/ui/signals/DebouncedSignal';
+import ITableData from './interfaces/table-data.interface';
 
 @Component({
   standalone: true,
@@ -32,32 +30,23 @@ import TableData, { TableCell } from './models/table-data.interface';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit, OnDestroy, OnChanges {
-  protected signalListValues = signal<TableCell[][]>([]);
-  search = signal(``);
-  signalListTable = input<Observable<TableData<any>> | null>(
-    of({ titles: [], values: [] })
-  );
+export class TableComponent implements OnInit, OnDestroy {
+  search = debouncedSignal('');
+  signalListTable = input<ITableData | null>({ titles: [], values: [] });
+  signalListValues = this.onChangeFilter();
 
-  ngOnInit(): void {
-    this.signalListTable()?.subscribe((table) =>
-      this.signalListValues.set(table.values)
-    );
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {}
 
-  ngOnChanges(changes: SimpleChanges): void {}
-
-  changeFilter() {
-    this.signalListTable()?.subscribe((table) =>
-      this.signalListValues.update(() =>
-        table.values.filter((row) =>
-          row.some((cell) =>
-            cell.value?.toString()
-              .toLowerCase()
-              .includes(this.search().toLowerCase())
-          )
+  onChangeFilter() {
+    return computed(() =>
+      this.signalListTable()?.values.filter((row) =>
+        row.some((cell) =>
+          cell.value
+            ?.toString()
+            .toLowerCase()
+            .includes(this.search().toLowerCase())
         )
       )
     );

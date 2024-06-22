@@ -1,7 +1,7 @@
 <div class="table-header">
   <div class="filter">
     <mat-form-field class="medium" appearance="fill">
-      <input matInput [(ngModel)]="search" (ngModelChange)="changeFilter()" type="text" placeholder="Pesquisar por usuário">
+      <input matInput [(ngModel)]="search" type="text" placeholder="Pesquisar por usuário">
     </mat-form-field>
     <button mat-flat-button>Filtrar</button>
   </div>
@@ -17,7 +17,7 @@
 </div>
 <table [cellSpacing]="0" [cellPadding]="10">
   <thead>
-    @for (title of (signalListTable() | async)?.titles; track title) {
+    @for (title of signalListTable()?.titles; track title) {
       <th>{{title}}</th>
     }
     <th></th>
@@ -27,7 +27,17 @@
       <tr>
         @for (col of row; track col) {
         <td>
-          {{ col.type == 'date' && (col.value.toString() | date) || col.value }}
+          @switch (col.type) {
+            @case ('date') {
+              {{ col.value.toString() | date }}
+            }
+            @case ('currency') {
+              {{ col.value.toString() | currency: 'BRL' }}
+            }
+            @default {
+              {{ col.value.toString() }}
+            }
+          }
           @if (col.subtitle; as sub) {
             <span>{{ sub }}</span>
           }
@@ -42,6 +52,10 @@
           </a>
         </td>
       </tr>
+    } @empty {
+        <h3  style="width: 100; text-align: center; padding: 20px;">
+          Não há usuários cadastrados{{ search() && " neste filtro"}}.
+        </h3>
     }
   </tbody>
 </table>

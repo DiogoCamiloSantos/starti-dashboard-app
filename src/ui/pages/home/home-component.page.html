@@ -1,6 +1,6 @@
 <app-header></app-header>
 <section appSpacing class="main-container payments">
-    <h1>{{title()}}</h1>
-    <button mat-button class="right" mat-raised-button color="primary" (click)="addPayment()">Adicionar Pagamento</button>
-    <app-table [signalListTable]="payments$"></app-table>
+    <h1>Lista de Usuários</h1>
+    <button mat-button class="right" mat-raised-button color="primary">Adicionar Pagamento</button>
+    <app-table [signalListTable]="(paymentService.payments$ | async)"></app-table>
 </section>

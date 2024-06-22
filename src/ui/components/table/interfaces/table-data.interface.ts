@@ -1,9 +1,9 @@
-export default interface TableData<T> {
+export default interface ITableData {
   titles: string[];
-  values: TableCell[][];
+  values: ITableCell[][];
 }
 
-export interface TableCell {
+export interface ITableCell {
   value: string | number | boolean;
   subtitle?: string | number;
   type?: 'date' | 'currency' | 'text';
