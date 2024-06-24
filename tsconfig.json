@@ -24,7 +24,9 @@
       "dom"
     ],
     "paths": {
-      "@domain/*": ["src/app/core/domain/*"],
+      "@entities/*": ["src/core/entities/*"],
+      "@services/*": ["src/core/service/*"],
+      "@uiservices/*": ["src/ui/services/*"],
       "@app/*": ["src/app/*"],
       "@environments/*": ["src/environments/*"]
     }

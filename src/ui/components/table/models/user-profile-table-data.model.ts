@@ -1,4 +1,4 @@
-import { Payment } from 'src/core/domain/payment/payment';
+import { Payment } from 'src/core/entities/payment/payment';
 import ITableData, { ITableCell } from '../interfaces/table-data.interface';
 import readMetadata from 'src/ui/decorators/metadata.reader.decotator';
 import readTableDataDecorator from 'src/ui/decorators/table-data/table-data.reader.decotator';

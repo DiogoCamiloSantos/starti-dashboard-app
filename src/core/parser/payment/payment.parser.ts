@@ -1,4 +1,4 @@
-import { Payment } from "src/core/domain/payment/payment";
+import { Payment } from "src/core/entities/payment/payment";
 import { AbstractParser, PayloadList } from "../base/abstract.parser";
 import { Injectable } from "@angular/core";
 import ITableData, { ITableCell } from "src/ui/components/table/interfaces/table-data.interface";

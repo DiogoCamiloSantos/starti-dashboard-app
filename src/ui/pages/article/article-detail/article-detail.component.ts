@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArticleService } from '@app/services/article.service';
-import { Article } from 'src/domain/models/article';
+import { ArticleService } from '@services/article/article.service';
+import { Article } from '@entities/article/article';
 
 @Component({
   imports: [

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { LocalStorageEntry } from "./storage/local.storage";
 import { StorageEntry } from "./storage/storage";
-import { User } from "../domain/user/user";
+import { User } from "../entities/user/user";
 
 const USER_CREDENTIAL_KEY = `user-credential-${environment.appName}`;
 

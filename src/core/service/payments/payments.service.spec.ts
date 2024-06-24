@@ -4,7 +4,7 @@ import { AppComponent } from 'src/app/app.component';
 import { AppContext } from '../../context/app-context';
 import { ServiceModule } from '../service.module';
 import { PaymentService } from "./payments.service";
-import { Payment } from 'src/core/domain/payment/payment';
+import { Payment } from 'src/core/entities/payment/payment';
 
 describe("PaymentService", () => {
   let service: PaymentService;

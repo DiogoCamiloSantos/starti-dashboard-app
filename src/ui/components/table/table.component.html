@@ -53,9 +53,15 @@
         </td>
       </tr>
     } @empty {
-        <h3  style="width: 100; text-align: center; padding: 20px;">
-          Não há usuários cadastrados{{ search() && " neste filtro"}}.
-        </h3>
-    }
+        @if ((loadingService.loading$ | async) === true) {
+          <div appLoading class="spinner">
+            <div class="lds-dual-ring"></div>
+          </div>
+        } @else {
+          <h3 style="width: 100%; text-align: center; padding: 20px;">
+            Não há usuários cadastrados{{ search() && " neste filtro"}}.
+          </h3>
+        }
+      }
   </tbody>
 </table>

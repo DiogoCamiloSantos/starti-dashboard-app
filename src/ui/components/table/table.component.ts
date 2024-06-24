@@ -14,6 +14,8 @@ import { RepositoryModule } from 'src/core/repository/repository.module';
 import { ServiceModule } from 'src/core/service/service.module';
 import { debouncedSignal } from 'src/ui/signals/DebouncedSignal';
 import ITableData from './interfaces/table-data.interface';
+import { LoadingDirective } from 'src/ui/directives/loading.directive';
+import { LoadingService } from '@uiservices/loading.service';
 
 @Component({
   standalone: true,
@@ -25,7 +27,8 @@ import ITableData from './interfaces/table-data.interface';
     CommonModule,
     ServiceModule,
     RepositoryModule,
-  ],
+    LoadingDirective
+  ],  
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
@@ -34,6 +37,15 @@ export class TableComponent implements OnInit, OnDestroy {
   search = debouncedSignal('');
   signalListTable = input<ITableData | null>({ titles: [], values: [] });
   signalListValues = this.onChangeFilter();
+
+
+  constructor (
+    public loadingService: LoadingService
+  ) {
+
+  }
+
+
 
   ngOnInit(): void {}
 

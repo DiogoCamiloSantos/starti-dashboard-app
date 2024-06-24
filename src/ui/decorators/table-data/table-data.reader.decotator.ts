@@ -10,7 +10,6 @@ type TableDataDecoratorState = {
 
 function readTableDataDecorator(target: any, propertyKey: string)
   : TableDataDecoratorState {
-    console.log(propertyKey);
     
   const column = <string> Reflect.getMetadata(`${TableDataDecoratorEnum.Name}:${propertyKey}`, target, propertyKey);
   const props = <ITableDataProps> Reflect.getMetadata(`${TableDataDecoratorEnum.Props}:${propertyKey}`, target, propertyKey);

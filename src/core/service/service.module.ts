@@ -1,6 +1,7 @@
 import { ModuleWithProviders, NgModule } from "@angular/core";
 import { RepositoryModule } from "../repository/repository.module";
 import { PaymentService } from "./payments/payments.service";
+import { LoadingService } from "@uiservices/loading.service";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ export class ServiceModule {
         return {
             ngModule: ServiceModule,
             providers: [
-                PaymentService
+                PaymentService,
+                LoadingService
             ]
         }
     }

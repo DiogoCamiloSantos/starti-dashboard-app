@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { User } from 'src/core/domain/user/user';
+import { User } from 'src/core/entities/user/user';
 import { AppContext } from 'src/core/context/app-context';
 
 @Injectable({ providedIn: 'root' })
