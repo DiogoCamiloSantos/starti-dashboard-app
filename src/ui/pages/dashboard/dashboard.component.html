@@ -1,5 +1,7 @@
-<div class="dashboard">
-    <h1>Dashboard</h1>
-    <p>Bem-vindo ao painel de controle do CMS de notícias!</p>
-  </div>
+<section appSpacing class="main-container payments">
+  <h1>Lista de Usuários</h1>
+  <button mat-button class="right" mat-raised-button color="primary">Adicionar Pagamento</button>
+  <app-table [signalListTable]="(paymentService.payments$ | async)"></app-table>
+</section>
+
   
