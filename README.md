@@ -45,10 +45,6 @@ Este projeto é um Sistema de Gerenciamento de Conteúdo (CMS) desenvolvido em A
    - Adicionar gráficos e relatórios mais detalhados sobre o desempenho dos artigos.
    - Implementar widgets personalizáveis para o dashboard.
 
-2. **SEO e Compartilhamento**:
-   - Otimizar os artigos para motores de busca (SEO).
-   - Implementar funcionalidades de compartilhamento nas redes sociais diretamente do CMS.
-
 3. **Comentários e Feedback**:
    - Adicionar seção de comentários nos artigos para feedback dos leitores.
    - Implementar moderação de comentários para evitar spam e conteúdo inadequado.
