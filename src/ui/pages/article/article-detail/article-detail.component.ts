@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import Article from '@entities/article/article';
 import { ArticleService } from '@services/article/article.service';
-import { Article } from '@entities/article/article';
 
 @Component({
   imports: [
@@ -24,7 +24,7 @@ export class ArticleDetailComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.articleService.getArticle(id).subscribe(article => this.article = article);
+      // this.articleService.getArticle(id).subscribe(article => this.article = article);
     }
   }
 }

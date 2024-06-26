@@ -1,33 +1,51 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Article } from '@entities/article/article';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
+import { RemoteGatewayFactory } from 'src/core/gateway/remote-gateway-factory';
+import { ArticleParser } from 'src/core/parser/article/article.parser';
+import { RemoteGateway } from 'src/core/gateway/remote.gateway';
+import { BackendUrl } from 'src/core/gateway/config/url/back-end.url';
+import { IArticle } from '@entities/article/article.interface';
+import ITableData from 'src/ui/components/table/interfaces/table-data.interface';
+import { UserProfileTableData } from 'src/ui/components/table/models/user-profile-table-data.model';
+import Article from '@entities/article/article';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ArticleService {
-  private apiUrl = 'https://api.mynews.com/articles';
+  private remoteGateway: RemoteGateway;
 
-  constructor(private http: HttpClient) {}
+  articleSubject = new BehaviorSubject<ITableData>({ titles: [], values: [] });
+  articles$ = this.articleSubject.asObservable();
+
+  constructor(
+    private remoteGatewayFactory: RemoteGatewayFactory,
+    private articleParser: ArticleParser
+  ) {
+    this.remoteGateway = this.remoteGatewayFactory.createDefaultRemoteGateway();
+  }
+
+  getAll() {
+    try {
+      return this.remoteGateway
+        .getObs(new BackendUrl('Articles'))
+        .pipe(map((articles: any) => this.articleParser.parseListAsTableData(articles)))
+        .subscribe((tableData) => {
+
+      // console.log('teste', tableData);
+
+          this.articleSubject.next(tableData)
+          
+        });
+
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Article service is not available!`);
+    }
+  }
 
   getArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.apiUrl);
-  }
-
-  getArticle(id: string): Observable<Article> {
-    return this.http.get<Article>(`${this.apiUrl}/${id}`);
-  }
-
-  addArticle(article: Article): Observable<Article> {
-    return this.http.post<Article>(this.apiUrl, article);
-  }
-
-  updateArticle(article: Article): Observable<Article> {
-    return this.http.put<Article>(`${this.apiUrl}/${article.id}`, article);
-  }
-
-  deleteArticle(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return of([]);
   }
 }

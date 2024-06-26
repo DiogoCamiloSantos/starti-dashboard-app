@@ -1,7 +1,5 @@
 import { TableDataColumn } from "src/ui/decorators/table-data/tabledata.decorator";
 
-
-
 export class Payment {
 
     private id?: string;   

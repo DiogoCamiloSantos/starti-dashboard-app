@@ -23,12 +23,15 @@ nav {
     justify-content: space-between;
     height: -webkit-fill-available;
 
+    a {
+        cursor: pointer;
+    }
+
     .nav-item {
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding: 0 20px;
-        cursor: pointer;
 
         .profile {
             height: 36px;

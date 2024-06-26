@@ -19,7 +19,7 @@ export class PaymentParser extends AbstractParser<Payment> {
         return payment;
     }
 
-    parseListAsTable(payload: PayloadList): ITableData {
+    parseListAsTableData(payload: PayloadList): ITableData {
       return {titles: [], values: []};
     }
 }

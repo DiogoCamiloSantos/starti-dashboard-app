@@ -1,12 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { RoutesEnum } from '@app/app.routes';
-import { Article } from '@entities/article/article';
+import Article from '@entities/article/article';
 import { ArticleService } from '@services/article/article.service';
+import { map } from 'rxjs';
+import { UserProfileTableData } from 'src/ui/components/table/models/user-profile-table-data.model';
+import { TableComponent } from 'src/ui/components/table/table.component';
 
 @Component({
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, MatButtonModule, TableComponent],
   standalone: true,
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
@@ -16,21 +20,15 @@ export class ArticleListComponent implements OnInit {
   articles: Article[] = [];
   routes = RoutesEnum;
 
-  constructor(private articleService: ArticleService) {}
+  constructor(public articleService: ArticleService) {}
 
   ngOnInit(): void {
-    this.articleService.getArticles().subscribe((data) => {
-      this.articles = data;
-    });
+    this.articleService.getAll();
   }
 
   editArticle(id: string): void {
-    // Navegar para a rota de edição
   }
 
   deleteArticle(id: string): void {
-    this.articleService.deleteArticle(id).subscribe(() => {
-      this.articles = this.articles.filter((article) => article.id !== id);
-    });
   }
 }

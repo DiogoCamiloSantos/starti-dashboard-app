@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import path from 'path';
 import { AuthGuard } from 'src/core/service/guards/auth-guard.service';
+import { TableComponent } from 'src/ui/components/table/table.component';
 import { ArticleDetailComponent } from 'src/ui/pages/article/article-detail/article-detail.component';
 import { ArticleFormComponent } from 'src/ui/pages/article/article-form/article-form.component';
 import { ArticleListComponent } from 'src/ui/pages/article/article-list/article-list.component';
@@ -32,11 +33,15 @@ export const routes: Routes = [
   {
     path: "",
     component: HomeComponentPage,
+   
     children: [
       { path: RoutesEnum.Init.Home, component: DashboardComponent },
       {
         path: RoutesEnum.Dashboard.Articles,
         component: ArticleListComponent,
+        providers: [
+          TableComponent,
+        ],
         children: [
           { path: RoutesEnum.Articles.Details, component: ArticleDetailComponent },
           { path: RoutesEnum.Articles.Edit, component: ArticleFormComponent },

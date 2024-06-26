@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Observable, delay, map, of } from "rxjs";
+import { Observable, map } from "rxjs";
 import { Payment } from "src/core/entities/payment/payment";
 import { BackendUrl } from "src/core/gateway/config/url/back-end.url";
-import ITableData from "src/ui/components/table/interfaces/table-data.interface";
 import { RemoteGatewayFactory } from "../../gateway/remote-gateway-factory";
 import { PaymentParser } from "../../parser/payment/payment.parser";
 

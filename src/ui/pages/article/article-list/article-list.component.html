@@ -1,11 +1,17 @@
 <div class="article-list">
   <h2>Articles</h2>
-  <ul>
+  <!-- <ul>
     <li *ngFor="let article of articles">
       <a [routerLink]="['/edit', article.id]">{{ article.title }}</a>
       <button (click)="editArticle(article.id || '')">Edit</button>
       <button (click)="deleteArticle(article.id || '')">Delete</button>
     </li>
-  </ul>
-  <button [routerLink]="routes.Articles.Create">New Article</button>
+  </ul> -->
+
+  <app-table [signalListTable]="articleService.articles$ | async"></app-table>
+
+
+
+
+  <button mat-button [routerLink]="routes.Articles.Create">New Article</button>
 </div>

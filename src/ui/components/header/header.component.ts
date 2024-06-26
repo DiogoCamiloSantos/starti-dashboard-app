@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { User } from 'src/core/entities/user/user';
 import { AuthenticationService } from 'src/core/service/authentication/authentication.service';
 
 @Component({
   selector: 'app-header',
   imports: [
-    CommonModule],
+    CommonModule,
+    RouterModule
+  ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true
