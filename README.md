@@ -4,7 +4,7 @@
 
 ## Descrição
 
-Este projeto é um Sistema de Gerenciamento de Conteúdo (CMS) desenvolvido em Angular, com o objetivo de gerenciar um aplicativo de notícias focado em artigos e conteúdos técnicos relacionados ao mercado de TI. O CMS permite aos administradores criar, editar, visualizar e organizar artigos de forma eficiente, oferecendo uma interface amigável e responsiva para facilitar a gestão de conteúdos.
+Este projeto em início de desenvolvimento é um Sistema de Gerenciamento de Conteúdo (CMS) desenvolvido em Angular, com o objetivo de gerenciar um aplicativo de notícias focado em artigos e conteúdos técnicos relacionados ao mercado de TI. O CMS permite aos administradores criar, editar, visualizar e organizar artigos de forma eficiente, oferecendo uma interface amigável e responsiva para facilitar a gestão de conteúdos.
 
 ## Funcionalidades Principais
 
