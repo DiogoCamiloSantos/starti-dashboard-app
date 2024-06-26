@@ -1,0 +1,67 @@
+<div class="table-header">
+  <div class="filter">
+    <mat-form-field class="medium" appearance="fill">
+      <input matInput [(ngModel)]="search" type="text" placeholder="Pesquisar por usuário">
+    </mat-form-field>
+    <button mat-flat-button>Filtrar</button>
+  </div>
+  <div class="paginator">
+    <button>{{"\<"}}</button>
+        <button class="page">1</button>
+        <button class="page">2</button>
+        <button class="page">3</button>
+        <button class="page">4</button>
+        <button class="page">5</button>
+        <button>{{">"}}</button>
+  </div>
+</div>
+<table [cellSpacing]="0" [cellPadding]="10">
+  <thead>
+    @for (title of signalListTable()?.titles; track title) {
+      <th>{{title}}</th>
+    }
+    <th></th>
+  </thead>
+  <tbody>
+    @for (row of signalListValues(); track row) {
+      <tr>
+        @for (col of row; track col) {
+        <td>
+          @switch (col.type) {
+            @case ('date') {
+              {{ col.value.toString() | date }}
+            }
+            @case ('currency') {
+              {{ col.value.toString() | currency: 'BRL' }}
+            }
+            @default {
+              {{ col.value.toString() }}
+            }
+          }
+          @if (col.subtitle; as sub) {
+            <span>{{ sub }}</span>
+          }
+        </td>
+        }
+        <td>
+          <a>
+            <div class="edit"></div>
+          </a>
+          <a>
+            <div class="remove"></div>
+          </a>
+        </td>
+      </tr>
+    } @empty {
+        @if ((loadingService.loading$ | async) === true) {
+          <div appLoading class="spinner">
+            <div class="lds-dual-ring"></div>
+          </div>
+        } @else {
+          <h3 style="width: 100%; text-align: center; padding: 20px;">
+            Não há usuários cadastrados{{ search() && " neste filtro"}}.
+          </h3>
+        }
+      }
+  </tbody>
+</table>
