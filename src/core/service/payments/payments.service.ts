@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, map } from "rxjs";
 import ITableData from "src/ui/components/table/interfaces/table-data.interface";
-import { UserProfileTableData } from "src/ui/components/table/models/user-profile-table-data.model";
 import { PaymentRepository } from "../../repository/payment/payments.repository";
+import { TableData } from "src/ui/components/table/models/table-data.model";
+import { Payment } from "@entities/payment/payment";
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class PaymentService {
     try {
       return this.paymentRepository
         .get()
-        .pipe(map((payments) => new UserProfileTableData(payments)))
+        .pipe(map((payments) => new TableData(payments, Payment)))
         .subscribe((payments) => this.paymentsSubject.next(payments));
         
     } catch (error) {

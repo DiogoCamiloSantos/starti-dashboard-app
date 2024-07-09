@@ -1,7 +1,7 @@
 <section appSpacing class="main-container payments">
   <h1>Lista de Usuários</h1>
   <button mat-button class="right" mat-raised-button color="primary">Adicionar Pagamento</button>
-  <app-table [signalListTable]="(paymentService.payments$ | async)"></app-table>
+  <app-table [signalListTable]="paymentService.payments$ | async"></app-table>
 </section>
 
   

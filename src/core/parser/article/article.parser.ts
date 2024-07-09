@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import ITableData from "src/ui/components/table/interfaces/table-data.interface";
 import { AbstractParser, PayloadList } from "../base/abstract.parser";
-import { UserProfileTableData } from "src/ui/components/table/models/user-profile-table-data.model";
 import Article from "@entities/article/article";
+import { TableData } from "src/ui/components/table/models/table-data.model";
 
 @Injectable({providedIn: `root`})
 export class ArticleParser extends AbstractParser<Article> {
@@ -17,9 +17,6 @@ export class ArticleParser extends AbstractParser<Article> {
     }
 
     parseListAsTableData(payload: PayloadList): ITableData {
-      let a = new UserProfileTableData(this.parseList(payload));
-      console.log("teste", a);
-      
-      return a; 
+      return new TableData(this.parseList(payload), Article); 
     }
 }

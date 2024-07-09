@@ -1,7 +1,6 @@
 import { TableDataColumn } from "src/ui/decorators/table-data/tabledata.decorator";
-import { IArticle } from "./article.interface";
 
-export default class Article implements IArticle {
+export default class Article  {
     id?: string | undefined;
     
     @TableDataColumn("Título")
@@ -10,13 +9,25 @@ export default class Article implements IArticle {
     @TableDataColumn("Conteúdo")
     content: string;
 
-    // @TableDataColumn("Autor")
+    @TableDataColumn("Autor")
     author: string;
 
-    // @TableDataColumn("Criado em", {
-    //     type: "date"
-    // })
+    @TableDataColumn("Criado em", {
+        type: "date"
+    })
     createdAt: Date;
 
     updatedAt: Date;
+    
+    constructor (
+        title?: string,
+        content?: string,
+        author?: string,
+        createdAt?: Date
+      ) {
+        this.title = title || "";
+        this.content = content || "";
+        this.author = author || "";
+        this.createdAt = createdAt || new Date;
+      }
 }

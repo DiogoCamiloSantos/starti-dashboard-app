@@ -7,9 +7,10 @@
       "terminal.integrated.shell.linux": "/bin/sh"
     },
     "extensions": [
-      "dbaeumer.vscode-eslint",
-      "esbenp.prettier-vscode",
-      "angular.ng-template"
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "angular.ng-template",
+        "christian-kohler.path-intellisense"
     ],
     "postCreateCommand": "npm start"
   }

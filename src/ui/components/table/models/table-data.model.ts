@@ -1,20 +1,18 @@
-import Article from '@entities/article/article';
 import readTableDataDecorator from 'src/ui/decorators/table-data/table-data.reader.decotator';
 import ITableData, { ITableCell } from '../interfaces/table-data.interface';
 
-export class UserProfileTableData implements ITableData {
+
+export class TableData implements ITableData {
   titles: string[];
   values: ITableCell[][];
 
-  constructor(payments: Object[]) {
-    const decorators = Object.keys(new Article())
-      .map((field) => readTableDataDecorator(Article.prototype, field))
+  constructor(items: Object[], fromClass: any) {
+    const decorators = Object.keys(items[0]!)
+      .map((field) => readTableDataDecorator(fromClass.prototype, field))
       .filter((dec) => dec.column);
 
 
-      console.log('decorators', decorators);
-      
-    const values = payments.map((obj: any) =>
+    const values = items.map((obj: any) =>
       decorators.map((d) => ({
         value: obj[d.propertyKey],
         ...(d.props?.subtitle && { subtitle: obj[d.props.subtitle] }),

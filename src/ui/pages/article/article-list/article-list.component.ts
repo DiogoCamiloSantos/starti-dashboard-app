@@ -5,8 +5,6 @@ import { RouterModule } from '@angular/router';
 import { RoutesEnum } from '@app/app.routes';
 import Article from '@entities/article/article';
 import { ArticleService } from '@services/article/article.service';
-import { map } from 'rxjs';
-import { UserProfileTableData } from 'src/ui/components/table/models/user-profile-table-data.model';
 import { TableComponent } from 'src/ui/components/table/table.component';
 
 @Component({

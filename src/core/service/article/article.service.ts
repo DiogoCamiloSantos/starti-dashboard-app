@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, map, of } from 'rxjs';
-import { RemoteGatewayFactory } from 'src/core/gateway/remote-gateway-factory';
-import { ArticleParser } from 'src/core/parser/article/article.parser';
-import { RemoteGateway } from 'src/core/gateway/remote.gateway';
-import { BackendUrl } from 'src/core/gateway/config/url/back-end.url';
-import { IArticle } from '@entities/article/article.interface';
-import ITableData from 'src/ui/components/table/interfaces/table-data.interface';
-import { UserProfileTableData } from 'src/ui/components/table/models/user-profile-table-data.model';
 import Article from '@entities/article/article';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
+import { BackendUrl } from 'src/core/gateway/config/url/back-end.url';
+import { RemoteGatewayFactory } from 'src/core/gateway/remote-gateway-factory';
+import { RemoteGateway } from 'src/core/gateway/remote.gateway';
+import { ArticleParser } from 'src/core/parser/article/article.parser';
+import ITableData from 'src/ui/components/table/interfaces/table-data.interface';
+import { TableData } from 'src/ui/components/table/models/table-data.model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,10 +28,9 @@ export class ArticleService {
     try {
       return this.remoteGateway
         .getObs(new BackendUrl('Articles'))
-        .pipe(map((articles: any) => this.articleParser.parseListAsTableData(articles)))
+        .pipe(map((articles: any) => new TableData(articles, Article)))
         .subscribe((tableData) => {
-
-      // console.log('teste', tableData);
+          console.log(`tableData`, tableData);
 
           this.articleSubject.next(tableData)
           
