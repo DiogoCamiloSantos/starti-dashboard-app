@@ -27,7 +27,7 @@ export class ArticleService {
   getAll() {
     try {
       return this.remoteGateway
-        .getObs(new BackendUrl('Articles'))
+        .get(new BackendUrl('Articles'))
         .pipe(map((articles: any) => new TableData(articles, Article)))
         .subscribe((tableData) => {
           console.log(`tableData`, tableData);

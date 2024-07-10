@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   OnDestroy,
   OnInit,
   computed,
-  input
+  effect,
+  input,
+  output
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +19,7 @@ import { debouncedSignal } from 'src/ui/signals/DebouncedSignal';
 import ITableData from './interfaces/table-data.interface';
 import { LoadingDirective } from 'src/ui/directives/loading.directive';
 import { LoadingService } from '@uiservices/loading.service';
+import { TableLoadingDirective } from 'src/ui/directives/table-loading.directive';
 
 @Component({
   standalone: true,
@@ -27,40 +31,26 @@ import { LoadingService } from '@uiservices/loading.service';
     CommonModule,
     ServiceModule,
     RepositoryModule,
-    LoadingDirective
-  ],  
+    LoadingDirective,
+    TableLoadingDirective
+  ],
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit, OnDestroy {
-  search = debouncedSignal('');
+export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
+  onSearch = output<string>();
+  
   signalListTable = input<ITableData | null>({ titles: [], values: [] });
-  signalListValues = this.onChangeFilter();
+  search = debouncedSignal('');
 
-
-  constructor (
-    public loadingService: LoadingService
-  ) {
-
+  constructor(public loadingService: LoadingService) {
+    effect(() => this.onSearch.emit(this.search()));
   }
 
-
+  ngAfterViewInit(): void {}
 
   ngOnInit(): void {}
 
   ngOnDestroy(): void {}
-
-  onChangeFilter() {
-    return computed(() =>
-      this.signalListTable()?.values.filter((row) =>
-        row.some((cell) =>
-          cell.value
-            ?.toString()
-            .toLowerCase()
-            .includes(this.search().toLowerCase())
-        )
-      )
-    );
-  }
 }

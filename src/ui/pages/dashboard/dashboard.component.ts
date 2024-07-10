@@ -19,7 +19,15 @@ import { TableComponent } from 'src/ui/components/table/table.component';
 export class DashboardComponent implements OnInit {
   protected paymentService = inject(PaymentService);
 
-  constructor() { }
+  constructor() { 
+  
+    // this.paymentService.getAll();
+  }
 
-  ngOnInit(): void { }
+  ngOnInit() {
+  }
+
+  getBy(search: string) {
+    this.paymentService.getBy(search)
+  }
 }

@@ -15,10 +15,16 @@ export class PaymentRepository {
     get(): Observable<Payment[]> {
       const request = this.remoteGatewayFactory.createDefaultRemoteGateway();
 
-      return request.getObs(new BackendUrl("UserProfile")).pipe(map((response: any) => {
-        const data = this.paymentParser.parseList(response);
-        
-        return data;
-      }));
+      return request
+        .get(new BackendUrl('UserProfile'))
+        .pipe(map((response: any) => this.paymentParser.parseList(response)));
+    }
+
+    getBy(search: string): Observable<Payment[]> {
+      const request = this.remoteGatewayFactory.createDefaultRemoteGateway();
+
+      return request
+        .post(new BackendUrl('UserProfile'), { search })
+        .pipe(map((response: any) => this.paymentParser.parseList(response)));
     }
 }

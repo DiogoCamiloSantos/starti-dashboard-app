@@ -7,7 +7,7 @@ export class TableData implements ITableData {
   values: ITableCell[][];
 
   constructor(items: Object[], fromClass: any) {
-    const decorators = Object.keys(items[0]!)
+    const decorators = Object.keys(items[0])
       .map((field) => readTableDataDecorator(fromClass.prototype, field))
       .filter((dec) => dec.column);
 

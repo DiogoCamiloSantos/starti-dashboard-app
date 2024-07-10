@@ -1,7 +1,9 @@
 <div class="table-header">
   <div class="filter">
     <mat-form-field class="medium" appearance="fill">
-      <input matInput [(ngModel)]="search" type="text" placeholder="Pesquisar por usuário">
+     @defer {
+      <input tableLoadingDirective matInput [(ngModel)]="search" type="text" placeholder="Pesquisar por usuário">
+     }
     </mat-form-field>
     <button mat-flat-button>Filtrar</button>
   </div>
@@ -15,7 +17,7 @@
         <button>{{">"}}</button>
   </div>
 </div>
-<table [cellSpacing]="0" [cellPadding]="10">
+<table tableLoadingDirective [cellSpacing]="0" [cellPadding]="10">
   <thead>
     @for (title of signalListTable()?.titles; track title) {
       <th>{{title}}</th>
@@ -23,7 +25,7 @@
     <th></th>
   </thead>
   <tbody>
-    @for (row of signalListValues(); track row) {
+    @for (row of signalListTable()?.values; track row) {
       <tr>
         @for (col of row; track col) {
         <td>
@@ -34,7 +36,7 @@
             @case ('currency') {
               {{ col.value.toString() | currency: 'BRL' }}
             }
-            @default {
+            @default {  
               {{ col.value.toString() }}
             }
           }
@@ -53,17 +55,9 @@
         </td>
       </tr>
     } @empty {
-          <td>
-            @if ((loadingService.loading$ | async) == true) {
-              <div appLoading class="spinner">
-                <div class="lds-dual-ring"></div>
-              </div>
-            } @else {
-              <h3 style="width: 100%; text-align: center; padding: 20px;">
-                Não há usuários cadastrados{{ search() && " neste filtro"}}.
-              </h3>
-            }
-          </td>
-        }
+      <h3 style="width: 100%; text-align: center; padding: 20px;">
+        Não há cadastros{{ search() && " neste filtro"}}.
+      </h3>
+    }
   </tbody>
 </table>

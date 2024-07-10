@@ -31,10 +31,10 @@ export class HomeComponentPage implements OnChanges {
   }
 
   ngOnDestroy() {
-    this.paymentService.paymentsSubject.unsubscribe();
+    // this.paymentService.paymentsSubject.unsubscribe();
   }
 
   ngOnInit() {
-    this.paymentService.getAll();
+    // this.paymentService.getAll();
   }
 }
