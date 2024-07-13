@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { PaymentService } from '@services/payments/payments.service';
 import { TableComponent } from 'src/ui/components/table/table.component';
@@ -7,8 +7,7 @@ import { TableComponent } from 'src/ui/components/table/table.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [
-    
+  imports: [    
     MatButtonModule,
     CommonModule,
     TableComponent
@@ -16,18 +15,8 @@ import { TableComponent } from 'src/ui/components/table/table.component';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   protected paymentService = inject(PaymentService);
-
-  constructor() { 
-  
-    // this.paymentService.getAll();
-  }
-
-  ngOnInit() {
-  }
-
-  getBy(search: string) {
-    this.paymentService.getBy(search)
-  }
+  protected payments$ = this.paymentService.payments$;
+  protected onSearch = (search: string) => this.paymentService.getBy(search);
 }

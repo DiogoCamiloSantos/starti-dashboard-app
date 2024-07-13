@@ -9,10 +9,10 @@ import { PaymentRepository } from '../../repository/payment/payments.repository'
   providedIn: 'root',
 })
 export class PaymentService {
-  constructor(private paymentRepository: PaymentRepository) {}
-
   private paymentsSubject = new Subject<ITableData>();
   readonly payments$ = this.paymentsSubject.asObservable();
+
+  constructor(private paymentRepository: PaymentRepository) {}
 
   getAll() {
     try {

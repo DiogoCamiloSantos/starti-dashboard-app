@@ -1,3 +1,5 @@
+@import 'variables';
+
 .loading-indicator {
     position: fixed;
     top: 50%;
@@ -32,5 +34,10 @@
             transform: rotate(360deg);
         }
     }
+}
+
+@mixin host-padding {
+    display: block;
+    padding: $host-padding;
 }
 
