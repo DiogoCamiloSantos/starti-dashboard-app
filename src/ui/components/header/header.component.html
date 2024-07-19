@@ -1,13 +1,8 @@
-<nav class="" *ngIf="currentUser">
-    <div class="navbar-nav">
-        <a routerLink="/dashboard">Dashboard</a>
-        <a routerLink="/articles">Articles</a>
-        <a routerLink="/login">Login</a>
-        <a class="nav-item nav-link" routerLink="/" routerLinkActive="active">
-            <div class="blue-logo"></div>
-        </a>
-        <a class="nav-item profile" (click)="logout()">
-            <img class="profile">
-        </a>
-    </div>
+<nav class="" *ngIf="currentUser" class="navbar-nav">
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/articles">Articles</a>
+    <a routerLink="/login">Login</a>
+    <a class="profile" (click)="logout()">
+        <img class="profile">
+    </a>
 </nav>

@@ -1,6 +1,6 @@
 <h2>Articles</h2>
   <app-table 
-    [signalListTable]="articleService.articles$ | async"
+    [tableData]="articleService.articles$ | async"
     (onSearch)="articleService.getBy($event)">
   </app-table>
 <button mat-button [routerLink]="routes.Articles.Create">New Article</button>

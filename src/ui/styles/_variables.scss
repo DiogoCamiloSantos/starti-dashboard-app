@@ -32,6 +32,9 @@ $orangeHover: rgb(233, 149, 33);
 $cyanHover: #17a2b8;
 $greenHover: #28a145;
 $blueHover: #D4DDE0;
+$darkBlueHover: hwb(240 9% 49%);
+
+$default-transition-on-hover: background-color 0.3s ease, color 0.3s ease;
 
 
 $primary: $blue;

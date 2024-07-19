@@ -38,19 +38,13 @@ import { TableLoadingDirective } from 'src/ui/directives/table-loading.directive
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TableComponent {
   onSearch = output<string>();
-  
-  signalListTable = input<ITableData | null>({ titles: [], values: [] });
   search = debouncedSignal('');
+  
+  tableData = input<ITableData | null>({ titles: [], values: [] });
 
   constructor(public loadingService: LoadingService) {
     effect(() => this.onSearch.emit(this.search()));
   }
-
-  ngAfterViewInit(): void {}
-
-  ngOnInit(): void {}
-
-  ngOnDestroy(): void {}
 }

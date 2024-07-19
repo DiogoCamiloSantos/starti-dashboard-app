@@ -1,7 +1,6 @@
 import readTableDataDecorator from 'src/ui/decorators/table-data/table-data.reader.decotator';
 import ITableData, { ITableCell } from '../interfaces/table-data.interface';
 
-
 export class TableData implements ITableData {
   titles: string[];
   values: ITableCell[][];
@@ -10,7 +9,6 @@ export class TableData implements ITableData {
     const decorators = Object.keys(items[0] || [])
       .map((field) => readTableDataDecorator(fromClass.prototype, field))
       .filter((dec) => dec.column);
-
 
     const values = items.map((obj: any) =>
       decorators.map((d) => ({

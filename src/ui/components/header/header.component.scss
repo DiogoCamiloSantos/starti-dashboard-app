@@ -1,14 +1,17 @@
-@import '../../../ui/styles/variables';
+@import 'variables';
+@import 'components';
 
-    :host {
-    display: flex;
-    background-color: $darkBlue;
-    width: 100%;
-    height: 70px;
-}
+:host {
+    nav {
+        width: -webkit-fill-available;
+        display: flex;
+        background-color: $darkBlue;
+        height: 70px;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 $host-padding;
+    }
 
-nav {
-    width: -webkit-fill-available;
 }
 
 .blue-logo {
@@ -20,23 +23,37 @@ nav {
 .navbar-nav {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     height: -webkit-fill-available;
+    gap: 30px;
 
     a {
         cursor: pointer;
-    }
-
-    .nav-item {
         display: flex;
+        font-size: $font-default;
         flex-direction: column;
         justify-content: center;
-        padding: 0 20px;
-
-        .profile {
-            height: 36px;
+        outline: none;
+        text-decoration: none;
+        color: white;
+        
+        &:not(.profile) {
+            padding: 0 14px;
+            height: 24px;
             border-radius: 25px;
+            background-color: hwb(240 1% 75%);
+
+            &:hover{
+                background-color: $darkBlueHover;
+                transition: $default-transition-on-hover;
+            }
+        }
+
+        &.profile {
+            margin-left: auto;
+            height: 36px;
             width: 36px;
+            border-radius: 25px;
             background-image: url('/assets/images/user-profile.svg');
         }
     }

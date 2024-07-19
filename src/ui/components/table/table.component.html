@@ -17,13 +17,13 @@
 </div>
 <table tableLoadingDirective [cellSpacing]="0" [cellPadding]="10">
   <thead>
-    @for (title of signalListTable()?.titles; track title) {
+    @for (title of tableData()?.titles; track title) {
       <th>{{title}}</th>
     }
     <th></th>
   </thead>
   <tbody>
-    @for (row of signalListTable()?.values; track row) {
+    @for (row of tableData()?.values; track row) {
       <tr>
         @for (col of row; track col) {
         <td>
