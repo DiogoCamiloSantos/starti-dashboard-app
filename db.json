@@ -1,0 +1,89 @@
+{
+  "UserProfile": [
+    {
+      "id": "1",
+      "firstName": "Diogo",
+      "lastName": "Camilo",
+      "email": "@diogocamilo",
+      "title": "Programador",
+      "createdAt": "2022-09-29T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "firstName": "Luciana",
+      "lastName": "Oliveira",
+      "email": "@lucy",
+      "title": "Programadora",
+      "createdAt": "2022-09-29T00:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "firstName": "Carlos",
+      "lastName": "Silva",
+      "email": "@carlossilva",
+      "title": "Designer",
+      "createdAt": "2022-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "firstName": "Ana",
+      "lastName": "Souza",
+      "email": "@anasouza",
+      "title": "Product Manager",
+      "createdAt": "2022-10-05T00:00:00.000Z"
+    },
+    {
+      "id": "5",
+      "firstName": "Rafael",
+      "lastName": "Costa",
+      "email": "@rafaelcosta",
+      "title": "DevOps",
+      "createdAt": "2022-10-10T00:00:00.000Z"
+    },
+    {
+      "id": "6",
+      "firstName": "Julia",
+      "lastName": "Martins",
+      "email": "@juliamartins",
+      "title": "QA Engineer",
+      "createdAt": "2022-10-15T00:00:00.000Z"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "firstName": "Admin",
+      "lastName": "User"
+    },
+    {
+      "id": 2,
+      "username": "diogo",
+      "firstName": "Diogo",
+      "lastName": "Camilo"
+    }
+  ],
+  "articles": [
+    {
+      "id": "1",
+      "title": "Introdução ao Angular 17",
+      "content": "Angular 17 trouxe diversas melhorias de performance e novos recursos como standalone components.",
+      "author": "Diogo Camilo",
+      "createdAt": "2024-01-10T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "RxJS na prática",
+      "content": "Aprenda a usar Observables, Subjects e operadores RxJS em aplicações reais.",
+      "author": "Luciana Oliveira",
+      "createdAt": "2024-01-15T00:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "Angular Material Design",
+      "content": "Como usar os componentes do Angular Material para criar interfaces modernas.",
+      "author": "Carlos Silva",
+      "createdAt": "2024-01-20T00:00:00.000Z"
+    }
+  ]
+}
